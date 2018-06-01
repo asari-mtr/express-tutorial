@@ -1,13 +1,18 @@
 var express = require('express');
 var app = express();
 
-app.use('/things', function(req, res, next) {
-    console.log("A new request received at " + Date.now());
+app.use(function(req, res, next) {
+    console.log("Start");
     next();
 });
 
-app.get('/things', function(req, res) {
-    res.send('Things');
+app.get("/", function(req, res, next) {
+    res.send("Middle");
+    next();
+});
+
+app.use("/", function(req, res) {
+    console.log("End");
 });
 
 app.listen(3000);
