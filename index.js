@@ -1,8 +1,20 @@
 var express = require('express');
 var app = express();
 
-var things = require('./things.js');
+app.get('/:id', function(req, res) {
+    res.send('The id you specified is ' + req.params.id);
+});
 
-app.use('/things', things);
+app.get('/things/:name/:id', function(req, res) {
+    res.send('id:' + req.params.id + ' and name:  ' + req.params.name);
+});
+
+app.get('/direct/:id([0-9]{5})', function(req, res) {
+    res.send('id: ' + req.params.id);
+});
+
+app.get('*', function(req, res) {
+    res.send('Sorry, this is an invalid URL.');
+});
 
 app.listen(3000);
