@@ -1,35 +1,28 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
 var app = express();
 
-app.use('/static', express.static('public'));
-app.use(express.static('images'));
+app.get('/', function(req, res) {
+    res.render('form');
+});
 
 app.set('view engine', 'pug');
 app.set('views', './views');
 
-app.get('/first_template', function(req, res) {
-    res.render('first_view');
-});
+// for parsing application/json
+app.use(bodyParser.json());
 
-app.get('/static_file_test', function(req, res) {
-    res.render('static_file_test');
-});
+// for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/dynamic_view', function(req, res) {
-    res.render('dynamic', {
-        name: "TutorialsPoint",
-        url: "http://www.tutorialspoint.com"
-    });
-});
+// for parsing multipart/form-data
+app.use(upload.array());
+app.use(express.static('public'));
 
-app.get('/login', function(req, res) {
-    res.render('login', {
-        user: {name: "Ayush", age: "20"}
-    });
+app.post('/', function(req, res) {
+    console.log(req.body);
+    res.send("received your request!");
 });
-
-app.get('/components', function(req, res) {
-    res.render('content');
-});
-
 app.listen(3000);
