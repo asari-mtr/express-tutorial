@@ -15,4 +15,10 @@ app.get('/dynamic_view', function(req, res) {
     });
 });
 
+app.get('/login', function(req, res) {
+    res.render('login', {
+        user: {name: "Ayush", age: "20"}
+    });
+});
+
 app.listen(3000);
