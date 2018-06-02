@@ -21,4 +21,8 @@ app.get('/login', function(req, res) {
     });
 });
 
+app.get('/components', function(req, res) {
+    res.render('content');
+});
+
 app.listen(3000);
