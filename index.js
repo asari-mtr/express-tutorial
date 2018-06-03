@@ -1,16 +1,15 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var multer = require('multer');
 var upload = multer();
 var app = express();
 var mongoose = require('mongoose');
 
-app.get('/', function(req, res) {
-    res.render('form');
-});
-
 app.set('view engine', 'pug');
 app.set('views', './views');
+
+app.use(cookieParser());
 
 // for parsing application/json
 app.use(bodyParser.json());
@@ -21,6 +20,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // for parsing multipart/form-data
 app.use(upload.array());
 app.use(express.static('public'));
+
+app.get('/', function(req, res) {
+    res.cookie("name", "express").send("cookie set")
+});
+
+app.get('/clear_cookie_name', function(req, res) {
+    res.clearCookie('name');
+    res.send('cookie foo cleared');
+});
 
 app.post('/', function(req, res) {
     console.log(req.body);
