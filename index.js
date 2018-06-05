@@ -6,6 +6,7 @@ var upload = multer();
 var mongoose = require('mongoose');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
+var auth= require('./lib/auth.js');
 
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -95,79 +96,6 @@ app.delete('/people/:id', function(req, res) {
     });
 });
 
-var Users = [];
-
-app.get('/signup', function(req, res) {
-    res.render('signup');
-});
-
-app.post('/signup', function(req, res) {
-    if(!req.body.id || !req.body.password) {
-        res.status("400");
-        res.send("Invalid details!");
-    } else {
-        var u = Users.filter(function(user) {
-            if(user.id === req.body.id) {
-                res.render('signup', {
-                    message: "User Already Exists! Login or choose another user id"});
-                return user;
-            }
-        });
-        if(u.length == 0) {
-          var newUser = {id: req.body.id, password: req.body.password};
-          Users.push(newUser);
-          req.session.user = newUser;
-          res.redirect('/protected_page');
-        }
-    }
-});
-
-function checkSignIn(req, res, next) {
-    if(req.session.user){
-        return next();
-    } else {
-        var err = new Error("Not logged in!");
-        console.log(req.session.user);
-        return next(err);
-    }
-}
-
-app.get('/protected_page', checkSignIn, function(req, res) {
-    res.render('protected_page', {id: req.session.user.id});
-});
-
-// error handling
-app.use('/protected_page', function(err, req, res, next) {
-    console.log(err);
-    res.redirect('/login');
-});
-
-app.get('/login', function(req, res) {
-    res.render('login');
-});
-
-app.post('/login', function(req, res) {
-    if(!req.body.id || !req.body.password){
-        res.render('login', {message: "Please enter both id and password"});
-    } else {
-        var u = Users.filter(function(user) {
-            if(user.id === req.body.id && user.password === req.body.password) {
-                req.session.user = user;
-                res.redirect('/protected_page');
-                return user;
-            }
-        });
-        if(u.length == 0) {
-          res.render('login', {message: "Invalid credentials!"});
-        }
-    }
-});
-
-app.get("/logout", function(req, res) {
-    req.session.destroy(function() {
-        console.log("user logged out.");
-    });
-    res.redirect('/login');
-});
+app.use(auth);
 
 app.listen(3000);
