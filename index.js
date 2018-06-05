@@ -106,16 +106,19 @@ app.post('/signup', function(req, res) {
         res.status("400");
         res.send("Invalid details!");
     } else {
-        Users.filter(function(user) {
+        var u = Users.filter(function(user) {
             if(user.id === req.body.id) {
                 res.render('signup', {
                     message: "User Already Exists! Login or choose another user id"});
+                return user;
             }
         });
-        var newUser = {id: req.body.id, password: req.body.password};
-        Users.push(newUser);
-        req.session.user = newUser;
-        res.redirect('/protected_page');
+        if(u.length == 0) {
+          var newUser = {id: req.body.id, password: req.body.password};
+          Users.push(newUser);
+          req.session.user = newUser;
+          res.redirect('/protected_page');
+        }
     }
 });
 
