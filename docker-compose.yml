@@ -1,0 +1,29 @@
+version: "2"
+
+networks:
+    bridge:
+        driver: bridge
+services:
+    node:
+        image: "node:10.3.0"
+        ports:
+            - "3000:3000"
+        working_dir: /usr/src/app
+        volumes:
+            - .:/usr/src/app
+        command: node index.js
+        depends_on:
+            - mongo
+        links:
+            - mongo
+    mongo:
+        image: "mongo:3.4"
+        restart: always
+        ports:
+            - "27017:27017"
+        volumes:
+            - ./data/db:/data/db
+        command: mongod --smallfiles
+        environment:
+            - "MONGODB_USER=my_db"
+            - "MONGODB_PASS=password!"
