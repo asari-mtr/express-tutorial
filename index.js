@@ -138,20 +138,19 @@ app.get('/login', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-    console.log(Users);
-    console.log(req.body);
     if(!req.body.id || !req.body.password){
         res.render('login', {message: "Please enter both id and password"});
     } else {
-        Users.filter(function(user) {
+        var u = Users.filter(function(user) {
             if(user.id === req.body.id && user.password === req.body.password) {
-                console.log("success");
-                console.log(user);
                 req.session.user = user;
                 res.redirect('/protected_page');
+                return user;
             }
         });
-        res.render('login', {message: "Invalid credentials!"});
+        if(u.length == 0) {
+          res.render('login', {message: "Invalid credentials!"});
+        }
     }
 });
 
@@ -162,7 +161,8 @@ app.get("/logout", function(req, res) {
     res.redirect('/login');
 });
 
-app.get('/protected_page', function(req, res) {
+app.use('/protected_page', function(err, req, res, next) {
+    console.log(err);
     res.redirect('/login');
 });
 
