@@ -136,6 +136,12 @@ app.get('/protected_page', checkSignIn, function(req, res) {
     res.render('protected_page', {id: req.session.user.id});
 });
 
+// error handling
+app.use('/protected_page', function(err, req, res, next) {
+    console.log(err);
+    res.redirect('/login');
+});
+
 app.get('/login', function(req, res) {
     res.render('login');
 });
@@ -161,11 +167,6 @@ app.get("/logout", function(req, res) {
     req.session.destroy(function() {
         console.log("user logged out.");
     });
-    res.redirect('/login');
-});
-
-app.use('/protected_page', function(err, req, res, next) {
-    console.log(err);
     res.redirect('/login');
 });
 
