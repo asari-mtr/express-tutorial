@@ -38,7 +38,7 @@ app.post('/', function(req, res) {
     res.send("received your request!");
 });
 
-mongoose.connect('mongodb://mongo/my_db');
+mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/my_db");
 
 var personSchema = mongoose.Schema({
     name: String,

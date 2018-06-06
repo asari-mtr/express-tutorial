@@ -16,6 +16,8 @@ services:
             - mongo
         links:
             - mongo
+        environment:
+            - MONGODB_URL=mongodb://mongo/my_db
     mongo:
         image: "mongo:3.4"
         restart: always
