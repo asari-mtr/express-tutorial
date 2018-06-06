@@ -20,3 +20,8 @@ update person
 $ curl -X PUT --data "name=James&age=20&nationality=American" http://localhost:3000/people/5b135fcde739c49632546395
 $ curl -X DELETE http://localhost:3000/people/5b135fcde739c49632546395
 ```
+
+Run on docker-compose
+```
+$ docker-compose up
+```
