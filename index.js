@@ -98,4 +98,7 @@ app.delete('/people/:id', function(req, res) {
 
 app.use(auth);
 
+var movies = require('./movies.js');
+app.use('/movies', movies);
+
 app.listen(3000);
