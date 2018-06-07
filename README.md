@@ -31,4 +31,6 @@ REST test
 $ curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET localhost:3000/movies
 $ curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET localhost:3000/movies/101
 $ curl -X POST --data "name=Toy%20story&year=1995&rating=8.5" http://localhost:3000/movies
+$ curl -X PUT --data "name=Toy%20story&year=1995&rating=8.5" http://localhost:3000/movies/101
+$ curl -X DELETE http://localhost:3000/movies/101
 ```
