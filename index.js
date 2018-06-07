@@ -3,10 +3,10 @@ var app = express();
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var upload = multer();
-var mongoose = require('mongoose');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var auth= require('./lib/auth.js');
+var db = require('./config/db.js');
 
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -38,15 +38,13 @@ app.post('/', function(req, res) {
     res.send("received your request!");
 });
 
-mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/my_db");
-
-var personSchema = mongoose.Schema({
+var personSchema = db.Schema({
     name: String,
     age: Number,
     nationality: String
 });
 
-var Person = mongoose.model("Person", personSchema);
+var Person = db.model("Person", personSchema);
 
 app.get('/person', function(req, res) {
     res.render('person');
