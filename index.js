@@ -101,4 +101,7 @@ app.use(auth);
 var movies = require('./movies.js');
 app.use('/movies', movies);
 
+var errors = require('./errors.js');
+app.use('/errors', errors );
+
 app.listen(3000);
