@@ -1,7 +1,11 @@
 env:
   browser: true
   commonjs: true
-extends: 'eslint:recommended'
+plugins:
+  - node
+extends:
+  - 'eslint:recommended'
+  - 'plugin:node/recommended'
 rules:
   indent:
     - error
@@ -15,3 +19,6 @@ rules:
   semi:
     - error
     - always
+  node/exports-style:
+    - error
+    - 'module.exports'
