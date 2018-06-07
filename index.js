@@ -16,15 +16,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(upload.array());
 app.use(cookieParser());
 app.use(express.static('public'));
-app.use(session({secret: "Shh, its a secret!"}));
+app.use(session({secret: 'Shh, its a secret!'}));
 
 app.get('/', function(req, res) {
     if(req.session.page_views) {
         req.session.page_views++;
-        res.send("You visited this page" + req.session.page_views + " times");
+        res.send('You visited this page' + req.session.page_views + ' times');
     } else {
         req.session.page_views = 1;
-        res.send("Welcome to this page for the first time!");
+        res.send('Welcome to this page for the first time!');
     }
 });
 
@@ -35,7 +35,7 @@ app.get('/clear_cookie_name', function(req, res) {
 
 app.post('/', function(req, res) {
     console.log(req.body);
-    res.send("received your request!");
+    res.send('received your request!');
 });
 
 var personSchema = db.Schema({
@@ -44,7 +44,7 @@ var personSchema = db.Schema({
     nationality: String
 });
 
-var Person = db.model("Person", personSchema);
+var Person = db.model('Person', personSchema);
 
 app.get('/person', function(req, res) {
     res.render('person');
@@ -55,7 +55,7 @@ app.post('/person', function(req, res) {
 
     if(!personInfo.name || !personInfo.age || !personInfo.nationality) {
         res.render('show_message', {
-            message: "Sorry, you provided wrong info", type: "error"
+            message: 'Sorry, you provided wrong info', type: 'error'
         });
     } else {
         var newPerson = new Person({
@@ -66,9 +66,9 @@ app.post('/person', function(req, res) {
 
         newPerson.save(function(err, Person) {
             if(err) {
-                res.render('show_message', {message: "Database error", type: "error"});
+                res.render('show_message', {message: 'Database error', type: 'error'});
             } else {
-                res.render('show_message', {message: "New person added", type: "success", person: personInfo});
+                res.render('show_message', {message: 'New person added', type: 'success', person: personInfo});
             }
         });
     }
@@ -82,15 +82,15 @@ app.get('/people', function(req, res) {
 
 app.put('/people/:id', function(req, res) {
     Person.findByIdAndUpdate(req.params.id, req.body, function(err, response) {
-        if(err) res.json({message: "Error in updating person with id " + req.params.id});
+        if(err) res.json({message: 'Error in updating person with id ' + req.params.id});
         res.json(response);
     });
 });
 
 app.delete('/people/:id', function(req, res) {
     Person.findByIdAndRemove(req.params.id, function(err, response) {
-        if(err) res.json({message: "Error in deleting person with id " + req.params.id});
-        res.json({message: "Person with id " + req.params.id + " removed."});
+        if(err) res.json({message: 'Error in deleting person with id ' + req.params.id});
+        res.json({message: 'Person with id ' + req.params.id + ' removed.'});
     });
 });
 
