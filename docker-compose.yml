@@ -5,13 +5,13 @@ networks:
         driver: bridge
 services:
     node:
-        image: "node:10.3.0"
+        build: .
         ports:
             - "3000:3000"
         working_dir: /usr/src/app
         volumes:
             - .:/usr/src/app
-        command: node index.js
+        command: nodemon index.js
         depends_on:
             - mongo
         links:
