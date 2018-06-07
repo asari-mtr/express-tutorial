@@ -34,3 +34,8 @@ $ curl -X POST --data "name=Toy%20story&year=1995&rating=8.5" http://localhost:3
 $ curl -X PUT --data "name=Toy%20story&year=1995&rating=8.5" http://localhost:3000/movies/101
 $ curl -X DELETE http://localhost:3000/movies/101
 ```
+
+scaffolding
+```
+$ npm install -g yo
+```
