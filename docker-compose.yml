@@ -17,6 +17,7 @@ services:
         links:
             - mongo
         environment:
+            - DEBUG=express:*
             - MONGODB_URL=mongodb://mongo/my_db
     mongo:
         image: "mongo:3.4"
