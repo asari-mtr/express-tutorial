@@ -41,7 +41,7 @@ router.post('/', function(req, res) {
             rating: req.body.rating
         });
 
-        res.json({message: "New moview created.", location: "/movies/" + newId});
+        res.json({message: "New movie created.", location: "/movies/" + newId});
     }
 });
 
