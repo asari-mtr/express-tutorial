@@ -1,4 +1,4 @@
-function router(express, app) {
+function router(app) {
   app.use(require('./routes/home.js'));
   app.use(require('./routes/auth.js'));
   app.use(require('./routes/static.js'));
