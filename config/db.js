@@ -15,8 +15,11 @@ if (user.length == 0 && pass.length == 0) {
   throw new Error('Invalid modngdb user name or password');
 }
 
-var mongodbUrl = 'mongodb://' + credential + host + ':' + port + '/' + db;
+var mongodbUri = process.env.MONGODB_URI;
+if (!mongodbUri) {
+  mongodbUri = 'mongodb://' + credential + host + ':' + port + '/' + db;
+}
 
-mongoose.connect(mongodbUrl);
+mongoose.connect(mongodbUri);
 
 module.exports = mongoose;
