@@ -6,7 +6,6 @@ var upload = multer();
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var auth= require('./lib/auth.js');
-var db = require('./config/db.js');
 
 app.set('view engine', 'pug');
 app.set('views', './views');
