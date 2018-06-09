@@ -19,6 +19,8 @@ services:
         environment:
             - DEBUG=express:*
             - MONGODB_URI=mongo
+            - MONGODB_USER=my_db
+            - MONGODB_PASS=password!
     mongo:
         image: "mongo:3.4"
         restart: always
