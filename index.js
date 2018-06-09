@@ -4,4 +4,4 @@ var app = express();
 require('./config/config.js')(express, app);
 require('./routers.js')(app);
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
