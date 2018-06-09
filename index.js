@@ -5,7 +5,6 @@ var multer = require('multer');
 var upload = multer();
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
-var auth= require('./lib/auth.js');
 
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -27,28 +26,11 @@ app.get('/', function(req, res) {
     }
 });
 
-app.get('/clear_cookie_name', function(req, res) {
-    res.clearCookie('name');
-    res.send('cookie foo cleared');
-});
-
 app.post('/', function(req, res) {
     console.log(req.body);
     res.send('received your request!');
 });
 
-var people = require('./routes/people.js');
-app.use('/people', people);
-
-var person = require('./routes/person.js');
-app.use('/person', person);
-
-app.use(auth);
-
-var movies = require('./movies.js');
-app.use('/movies', movies);
-
-var errors = require('./errors.js');
-app.use('/errors', errors );
+app.use(require('./routers.js'));
 
 app.listen(3000);
