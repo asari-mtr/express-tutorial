@@ -8,6 +8,8 @@ var cookieParser = require('cookie-parser');
 var auth= require('./lib/auth.js');
 var db = require('./config/db.js');
 
+var Person = require('./models/person.js');
+
 app.set('view engine', 'pug');
 app.set('views', './views');
 
@@ -37,14 +39,6 @@ app.post('/', function(req, res) {
     console.log(req.body);
     res.send('received your request!');
 });
-
-var personSchema = db.Schema({
-    name: String,
-    age: Number,
-    nationality: String
-});
-
-var Person = db.model('Person', personSchema);
 
 app.get('/person', function(req, res) {
     res.render('person');
