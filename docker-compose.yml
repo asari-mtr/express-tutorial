@@ -18,7 +18,7 @@ services:
             - mongo
         environment:
             - DEBUG=express:*
-            - MONGODB_URL=mongodb://mongo/my_db
+            - MONGODB_URI=mongo
     mongo:
         image: "mongo:3.4"
         restart: always

@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
 
-var DEFAULT_MONGODB_URL = 'mongodb://localhost/my_db';
+var mongodbUri = process.env.MONGODB_URI || 'localhost';
 
-mongoose.connect(process.env.MONGODB_URL || DEFAULT_MONGODB_URL);
+var mongodbUrl = 'mongodb://' + mongodbUri + '/my_db';
+
+mongoose.connect(mongodbUrl);
 
 module.exports = mongoose;
