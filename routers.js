@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 
+app.use(require('./routes/home.js'));
 app.use(require('./routes/auth.js'));
 app.use('/clear_cookie_name', require('./routes/clear_cookie_name.js'));
 app.use('/people', require('./routes/people.js'));

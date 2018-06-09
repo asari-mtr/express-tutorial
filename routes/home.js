@@ -1,9 +1,7 @@
 var express = require('express');
-var app = express();
+var router = express.Router();
 
-app.use(require('./config/conifig.js'));
-
-app.get('/', function(req, res) {
+router.get('/', function(req, res) {
     if(req.session.page_views) {
         req.session.page_views++;
         res.send('You visited this page' + req.session.page_views + ' times');
@@ -13,11 +11,9 @@ app.get('/', function(req, res) {
     }
 });
 
-app.post('/', function(req, res) {
+router.post('/', function(req, res) {
     console.log(req.body);
     res.send('received your request!');
 });
 
-app.use(require('./routers.js'));
-
-app.listen(3000);
+module.exports = router;
