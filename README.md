@@ -39,3 +39,12 @@ scaffolding
 ```
 $ npm install -g yo
 ```
+
+Use Webpack
+``` sh
+# server side build
+$ npx webpack
+
+# run
+$ node dist/main.js
+```
