@@ -9,17 +9,9 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
-      },
-      {
-        test: /\.pug$/,
-        loader: ["raw-loader", "pug-loader"]
       }
     ]
   },
   externals: [nodeExternals()],
-  node: {
-    __dirname: false,
-    __filename: true
-  },
   target: "node"
 }

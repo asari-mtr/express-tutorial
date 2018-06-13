@@ -4,10 +4,9 @@ function config(express, app) {
   var upload = multer();
   var session = require('express-session');
   var cookieParser = require('cookie-parser');
-  var pug = require('pug');
 
   app.set('view engine', 'pug');
-  app.set('views', __dirname + '/views');
+  app.set('views', './views');
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
