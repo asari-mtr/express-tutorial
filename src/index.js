@@ -1,7 +1,10 @@
-var express = require('express');
-var app = express();
+import express from 'express';
+import config from './config/config.js';
+import router from './routers.js';
 
-require(__dirname + '/config/config.js')(express, app);
-require(__dirname +'/routers.js')(app);
+let app = express();
+
+config(express, app);
+router(app);
 
 app.listen(process.env.PORT || 3000);
