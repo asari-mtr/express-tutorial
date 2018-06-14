@@ -1,4 +1,5 @@
-function router(app) {
+import things from './things';
+export default function router(app) {
   app.use(require('./routes/home.js'));
   app.use(require('./routes/auth.js'));
   app.use(require('./routes/static.js'));
@@ -7,6 +8,5 @@ function router(app) {
   app.use('/person', require('./routes/person.js'));
   app.use('/movies', require('./routes/movies.js'));
   app.use('/errors', require('./routes/errors.js'));
+  app.use('/things', things);
 }
-
-module.exports = router;
