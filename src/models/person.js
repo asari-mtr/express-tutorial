@@ -1,11 +1,11 @@
-var db = require('../config/db.js');
+import db from '../config/db'
 
-var personSchema = db.Schema({
+const personSchema = db.Schema({
     name: String,
     age: Number,
     nationality: String
-});
+})
 
-var Person = db.model('Person', personSchema);
+const Person = db.model('Person', personSchema)
 
-module.exports = Person;
+export default Person

@@ -1,26 +1,26 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express'
+let router = express.Router()
 
-var Person = require('../models/person.js');
+import Person from '../models/person'
 
-router.get('/', function(req, res) {
-    Person.find(function(err, response) {
-        res.json(response);
-    });
-});
+router.get('/', (req, res) => {
+    Person.find((err, response) => {
+        res.json(response)
+    })
+})
 
-router.put('/:id', function(req, res) {
-    Person.findByIdAndUpdate(req.params.id, req.body, function(err, response) {
-        if(err) res.json({message: 'Error in updating person with id ' + req.params.id});
-        res.json(response);
-    });
-});
+router.put('/:id', (req, res) => {
+    Person.findByIdAndUpdate(req.params.id, req.body, (err, response) => {
+        if(err) res.json({message: 'Error in updating person with id ' + req.params.id})
+        res.json(response)
+    })
+})
 
-router.delete('/:id', function(req, res) {
-    Person.findByIdAndRemove(req.params.id, function(err, response) {
-        if(err) res.json({message: 'Error in deleting person with id ' + req.params.id});
-        res.json({message: 'Person with id ' + req.params.id + ' removed.'});
-    });
-});
+router.delete('/:id', (req, res) => {
+    Person.findByIdAndRemove(req.params.id, (err, response) => {
+        if(err) res.json({message: 'Error in deleting person with id ' + req.params.id})
+        res.json({message: 'Person with id ' + req.params.id + ' removed.'})
+    })
+})
 
-module.exports = router;
+export default router

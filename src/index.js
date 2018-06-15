@@ -1,10 +1,10 @@
-import express from 'express';
-import config from './config/config.js';
-import router from './routers.js';
+import express from 'express'
+import config from './config/config.js'
+import router from './routers.js'
 
-let app = express();
+let app = express()
 
-config(express, app);
-router(app);
+config(express, app)
+router(app)
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000)

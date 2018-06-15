@@ -1,1 +1,1 @@
-document.body.bgColor = '#f9caca';
+document.body.bgColor = '#f9caca'
